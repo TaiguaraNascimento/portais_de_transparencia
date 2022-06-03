@@ -146,6 +146,10 @@ class Buscador():
         seletor = Select(self.driver.find_element(By.ID, objeto))
         seletor.select_by_value(valor_para_pesquisar)
 
+    def selecionar_opcao_no_dropdown_por_xpath(self, objeto: str, valor_para_pesquisar: str):
+        seletor = Select(self.driver.find_element(By.XPATH, objeto))
+        seletor.select_by_value(valor_para_pesquisar)
+
     def preencher_campo_de_input_por_id(self, objeto: str, texto_para_escrever: str):
         elemento = self.driver.find_element_by_id(objeto)
         elemento.send_keys(texto_para_escrever)
@@ -176,3 +180,12 @@ class Buscador():
 
     def alterar_zoom_da_tela(self, zoom: int) -> None:
         self.driver.execute_script("document.body.style.zoom='" + str(zoom) + "%'")
+
+
+    def pressionar_teclas_em_serie(self, tecla: str, repeticoes: int) -> None:
+
+        for turn in range(1, repeticoes):
+            py.keyDown(tecla)
+    
+    def clicar_em_posicao_especifica_na_tela(self, posicao_x:int, posicao_y:int) -> None:
+        py.click(posicao_x, posicao_y)

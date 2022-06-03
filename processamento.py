@@ -51,6 +51,13 @@ Entidade('Estado do Amazonas', 'RJ', 'http://www.transparencia.am.gov.br/pessoal
 
 
 
+
+
+
+
+
+
+
 Entidade('Carapicuíba',        
 'RJ', 
 'http://www2.camaracarapicuiba.sp.gov.br/portaltransparencia/Pages/Geral/wfFolhaPagamento.aspx',                                                

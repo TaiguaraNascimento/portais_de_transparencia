@@ -17,49 +17,66 @@ class SCSantaCatarina:
 
     def processar_entidade(self) -> None:
         
-        self.buscador.pausa_curta()
 
-        ano_inicial = 2022
-        ano_final = 2022 # Exclusive
+        try:
+            self.buscador.pausa_curta()
 
-        ano_de_apoio = 2011
+            # Abaixar um pouco a tela
+            self.buscador.pressionar_teclas_em_serie("down", 28)
 
-        for ano in range(ano_inicial, ano_final + 1):
+            ano_inicial = 2022
+            ano_final = 2022 # Exclusive
 
-            seletor = ano - ano_de_apoio
+            ano_de_apoio = 2011
+            
 
-            print('Apoio:', seletor, ',', ano, ',', ano_de_apoio)
+            for ano in range(ano_inicial, ano_final + 1):
 
-            # Abre o seletor
-            self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[2]')
+                self.buscador.pausa_curta()
 
-            # Seleciona o ano do projeto
-            self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[2]/ul/li[' + str(seletor) + ']/a')
+                seletor = ano - ano_de_apoio
 
-            mes_inicial = 1
-            mes_final = 12 # Exclusive
+                print('Apoio:', seletor, ',', ano, ',', ano_de_apoio)
 
-            for mes in range(mes_inicial, mes_final + 1):
+                # Abre o seletor
+                self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[2]')
 
-                if self.buscador.ano_atual() == ano and (self.buscador.mes_atual()-1) == mes:
+                # Seleciona o ano do projeto
+                self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[2]/ul/li[' + str(seletor) + ']/a')
 
-                    pass
+                mes_inicial = 1
+                mes_final = 12 # Exclusive
 
-                else:
+                for mes in range(mes_inicial, mes_final + 1):
 
-                    for etapa in range(0, 5):
+                    self.buscador.pausa_curta()
 
-                        self.buscador.pausa_curta()
+                    # Abre o seletor de meses
+                    self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[1]')
 
-                        # Abre o seletor de meses
-                        self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[1]')
+                    # Aciona um botão de dropdown de período
+                    self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[1]/ul/li[' + str(mes) + ']')
 
-                        # Aciona um botão de dropdown de período
-                        self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[1]/ul/li[' + str(mes) + ']')
-
+                    try:
                         print('Obtendo dados de ', ano, ' do mes ', mes, '...')
 
-                        self.buscador.pausa_curta()
+
+                        for etapa in range(0, 5):
+
+                            self.buscador.pausa_curta()
+
+                            # Aciona um botão de dropdown da situacao
+                            self.buscador.selecionar_opcao_no_dropdown_por_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[4]/div/div[2]/div/select', str(etapa))
+
+                            self.buscador.pausa_curta()
+                            
+                            self.buscador.clicar_em_posicao_especifica_na_tela(558, 772)
+
+                    except:
+                        print('Não foi possível obter dados desse mês.')
+        
+        except:
+            print('Não foi possível executar o script inteiro.')
 
   
     def manter_janela_aberta(self):
