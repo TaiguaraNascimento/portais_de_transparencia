@@ -38,7 +38,7 @@ class SCSantaCatarina:
 
                 print('Apoio:', seletor, ',', ano, ',', ano_de_apoio)
 
-                # Abre o seletor
+                # Abre o seletorc
                 self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[2]')
 
                 # Seleciona o ano do projeto
@@ -58,19 +58,38 @@ class SCSantaCatarina:
                     self.buscador.clicar_no_elemento_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[2]/div/div[2]/div/div[1]/ul/li[' + str(mes) + ']')
 
                     try:
-                        print('Obtendo dados de ', ano, ' do mes ', mes, '...')
 
+                        orgao = [
+                            'Ativos',
+                            'Inativo_Iprev',
+                            'Pensionista_Especial',
+                            'Pensionista_IPREV'
+                            'PDI_PVI',
+                        ]
 
-                        for etapa in range(0, 5):
-
-                            self.buscador.pausa_curta()
+                        for etapa in range(0, 6):
 
                             # Aciona um botão de dropdown da situacao
-                            self.buscador.selecionar_opcao_no_dropdown_por_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[4]/div/div[2]/div/select', str(etapa))
+                            self.buscador.selecionar_opcao_no_dropdown_por_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[4]/div/div[2]/div/select', str(etapa + 1))
 
                             self.buscador.pausa_curta()
-                            
-                            self.buscador.clicar_em_posicao_especifica_na_tela(558, 772)
+
+                            print('Obtendo dados de ', ano, ' do mes ', mes, '...', str(etapa + 1), '-', orgao[etapa], 'Valores ->', self.buscador.obter_valor_de_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[6]/div[1]/div[2]/div/div[1]/div/div[1]'), "Servidores ->", self.buscador.obter_valor_de_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[6]/div[1]/div[2]/div/div[2]/div/div[1]'))
+
+                            if self.buscador.verificar_se_xpath_existe('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[6]/div[1]/div[3]/div/div[1]/a[2]'):
+                                    
+                                self.buscador.clicar_em_posicao_especifica_na_tela(558, 772)
+
+                                self.buscador.pausa_longa()
+                                self.buscador.pausa_longa()
+                                
+                                self.buscador.organizar_arquivos_baixados(orgao[etapa], 'Ano ' + str(ano), 'Mes ' + str(mes), str(orgao[etapa] + '_' + str(ano) + '_' + str(mes)))
+
+                            else:
+
+                                print('---------> Não há dados para download em ', ano, ' do mes ', mes, '...', str(etapa + 1), '-', orgao[etapa])
+
+
 
                     except:
                         print('Não foi possível obter dados desse mês.')

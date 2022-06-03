@@ -1,3 +1,4 @@
+from itertools import count
 import os
 import time
 from navegador.entidade import Entidade
@@ -64,12 +65,15 @@ class Buscador():
         else:
             print('Arquivo de log não existe.')
 
-    def organizar_arquivos_baixados(self, pasta1: str, pasta2: str, nome_prefixo: str) -> None:
+    def organizar_arquivos_baixados(self, pasta1: str, pasta2: str, pasta3: str, nome_prefixo: str) -> None:
 
-        try:
-            pasta_para_organizacao = os.path.join(self.pasta_de_organizacao, self.entidade.endereco_para_download, pasta1, pasta2)
-            lista_de_arquivos = [arquivo for arquivo in os.listdir(self.pasta_origem) if os.path.isfile(jos.path.join(self.pasta_origem, arquivo))]
+        #try:
+        pasta_para_organizacao = os.path.join(self.pasta_de_organizacao, self.entidade.endereco_para_download, pasta1, pasta2, pasta3)
+        lista_de_arquivos = [arquivo for arquivo in os.listdir(self.pasta_origem) if os.path.isfile(os.path.join(self.pasta_origem, arquivo))]
 
+        if lista_de_arquivos == None or lista_de_arquivos.count == 0:
+            print('Nenhum arquivo foi baixado para essa condição.')
+        else:
             if os.path.exists(pasta_para_organizacao) != True:
                 os.makedirs(pasta_para_organizacao)
             
@@ -80,8 +84,8 @@ class Buscador():
 
                 os.rename(os.path.join(self.pasta_origem, nome_atual), os.path.join(pasta_para_organizacao, nome_novo_do_arquivo))
         
-        except:
-            print('# Erro ao organizar os arquivos da pasta de origem |', self.pasta_origem, '|')
+        #except:
+            #print('# Erro ao organizar os arquivos da pasta de origem |', self.pasta_origem, '|')
 
     def popular_dados(self) -> None:
         # Dados dos seletores
@@ -181,11 +185,16 @@ class Buscador():
     def alterar_zoom_da_tela(self, zoom: int) -> None:
         self.driver.execute_script("document.body.style.zoom='" + str(zoom) + "%'")
 
-
     def pressionar_teclas_em_serie(self, tecla: str, repeticoes: int) -> None:
 
         for turn in range(1, repeticoes):
             py.keyDown(tecla)
     
+    def obter_valor_de_xpath(self, xpath: str) -> None:
+        return self.driver.find_element(By.XPATH, xpath).text
+
+
+
+
     def clicar_em_posicao_especifica_na_tela(self, posicao_x:int, posicao_y:int) -> None:
         py.click(posicao_x, posicao_y)

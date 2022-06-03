@@ -38,7 +38,6 @@ def testar_sc_santa_catarina():
 
 testar_sc_santa_catarina()
 
-# uf_estado_de_santa_catarina.buscador.organizar_arquivos_baixados('orgao1', '2021', str('orgao' + 'ano' + 'arquivo'))
 
 '''
 
