@@ -190,10 +190,11 @@ class Buscador():
         for turn in range(1, repeticoes):
             py.keyDown(tecla)
     
-    def obter_valor_de_xpath(self, xpath: str) -> None:
-        return self.driver.find_element(By.XPATH, xpath).text
-
-
+    def obter_valor_de_xpath(self, xpath: str):
+        try:
+            return self.driver.find_element(By.XPATH, xpath).text
+        except:
+            return 0
 
 
     def clicar_em_posicao_especifica_na_tela(self, posicao_x:int, posicao_y:int) -> None:

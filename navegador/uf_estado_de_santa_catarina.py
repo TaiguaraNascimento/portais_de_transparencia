@@ -24,15 +24,14 @@ class SCSantaCatarina:
             # Abaixar um pouco a tela
             self.buscador.pressionar_teclas_em_serie("down", 28)
 
-            ano_inicial = 2022
+            ano_inicial = 2021
             ano_final = 2022 # Exclusive
 
             ano_de_apoio = 2011
-            
 
             for ano in range(ano_inicial, ano_final + 1):
 
-                self.buscador.pausa_curta()
+                self.buscador.pausa_longa()
 
                 seletor = ano - ano_de_apoio
 
@@ -46,6 +45,8 @@ class SCSantaCatarina:
 
                 mes_inicial = 1
                 mes_final = 12 # Exclusive
+
+                self.buscador.pausa_curta()
 
                 for mes in range(mes_inicial, mes_final + 1):
 
@@ -63,11 +64,16 @@ class SCSantaCatarina:
                             'Ativos',
                             'Inativo_Iprev',
                             'Pensionista_Especial',
-                            'Pensionista_IPREV'
-                            'PDI_PVI',
-                        ]
+                            'Pensionista_IPREV',
+                            'PDI_PVI']
+
+                        '''orgao = [
+                            'Todas as situações'
+                        ]'''
 
                         for etapa in range(0, 6):
+
+                            self.buscador.pausa_curta()
 
                             # Aciona um botão de dropdown da situacao
                             self.buscador.selecionar_opcao_no_dropdown_por_xpath('//*[@id="balanco"]/div[3]/div/div/div/div[3]/div[4]/div/div[2]/div/select', str(etapa + 1))
@@ -83,7 +89,7 @@ class SCSantaCatarina:
                                 self.buscador.pausa_longa()
                                 self.buscador.pausa_longa()
                                 
-                                self.buscador.organizar_arquivos_baixados(orgao[etapa], 'Ano ' + str(ano), 'Mes ' + str(mes), str(orgao[etapa] + '_' + str(ano) + '_' + str(mes)))
+                                # self.buscador.organizar_arquivos_baixados(orgao[etapa], 'Ano ' + str(ano), 'todos', str(orgao[etapa] + '_' + str(ano) + '_' + str(mes)))
 
                             else:
 
