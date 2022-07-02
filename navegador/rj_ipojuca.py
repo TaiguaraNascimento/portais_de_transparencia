@@ -18,8 +18,8 @@ class RJIpojuca:
         self.entidade = Entidade(
             'Ipojuca',         
             'RJ', 
-            'http://s2.asp.srv.br/etransparencia.pm.ipojuca.pe/servlet/wppessoalconsulta', 
-            links[0],
+            links[5][1], 
+            'rj_ipojuca',
             'A partir de 01/2017, porém está por órgão.')
 
         self.buscador = Buscador(self.entidade)
@@ -31,13 +31,16 @@ class RJIpojuca:
 
         for mes in range(mes_inicial, mes_final + 1):
 
+            print(str(mes))
+
             # Seleciona o mês
             self.buscador.selecionar_opcao_no_dropdown('vMES', str(mes))
 
+            self.buscador.pausa_longa()
+
+            self.buscador.clicar_no_elemento_xpath('/html/body/form/div[2]/div[2]/table[1]/tbody/tr/td/table/tbody/tr/td/table/tbody/tr[5]/td/table/tbody/tr/td[2]/div/div/table/tbody/tr[2]/td/table[13]/tbody/tr/td[1]/table/tbody/tr/td[6]/table/tbody/tr/td/img')
+
             self.buscador.pausa_curta()
-
-            # self.buscador.clicar_no_elemento_xpath('//*[@id="EXPORTCSV"]')
-
 
     def manter_janela_aberta(self):
         while(True):

@@ -10,7 +10,7 @@ def testar_minas_gerais():
     uf_minas_gerais.manter_janela_aberta()
 
 def testar_pb_campina_grande():
-    from navegador.pendentes.pb_campina_grande import PBCampinaGrande
+    from navegador.pb_campina_grande import PBCampinaGrande
     pb_campina_grande = PBCampinaGrande()
     pb_campina_grande.processar_entidade()
     pb_campina_grande.manter_janela_aberta()
@@ -33,98 +33,70 @@ def testar_sc_santa_catarina():
     uf_estado_de_santa_catarina.processar_entidade()
     uf_estado_de_santa_catarina.manter_janela_aberta()
 
+def testar_sp_itaquaquecetuba():
+    from navegador.sp_itaquaquecetuba import SPItaquaquecetuba 
+    uf_estado_de_santa_catarina = SPItaquaquecetuba()
+    uf_estado_de_santa_catarina.processar_entidade()
+    uf_estado_de_santa_catarina.manter_janela_aberta()
 
-# Executar
+def rj_ipojuca():
+    from navegador.rj_ipojuca import RJIpojuca 
+    rj_ipojuca =     RJIpojuca()
+    rj_ipojuca.processar_entidade()
+    rj_ipojuca.manter_janela_aberta()
 
-testar_sc_santa_catarina()
-
-
-'''
-
-
-
-Entidade('Estado do Amazonas', 'RJ', 'http://www.transparencia.am.gov.br/pessoal/',                                                                                                  'A partir de 01/2017, porém está por órgão.')
-
-
-
-
-
-
-
-
+def mg_saolourenco():
+    from navegador.mg_saolourenco import MGSaoLourenco 
+    mg_saolourenco = MGSaoLourenco()
+    mg_saolourenco.processar_entidade()
+    mg_saolourenco.manter_janela_aberta()
 
 
 
+def sc_balnearoi_gaivota():
+    from navegador.sc_balnearoi_gaivota import SCBalnearioGaivota 
+    pb_campina_grande = SCBalnearioGaivota()
+    pb_campina_grande.processar_entidade()
+    pb_campina_grande.manter_janela_aberta()
+
+def mg_juiz_de_fora():
+    from navegador.mg_juiz_de_fora import MGJuizDeFora 
+    mg_juiz_de_fora = MGJuizDeFora()
+    mg_juiz_de_fora.processar_entidade()
+    mg_juiz_de_fora.manter_janela_aberta()
+
+def sp_cunha():
+    from navegador.sp_cunha import MGJuizDeFora 
+    sp_cunha = MGJuizDeFora()
+    sp_cunha.processar_entidade()
+    sp_cunha.manter_janela_aberta()
+
+def es_montanha():
+    from navegador.es_montanha import SCMontanha 
+    es_montanha = SCMontanha()
+    es_montanha.processar_entidade()
+    es_montanha.manter_janela_aberta()
+
+def rj_itatiaia():
+    from navegador.rj_itatiaia import RJItatiaia 
+    rj_itatiaia = RJItatiaia()
+    rj_itatiaia.processar_entidade()
+    rj_itatiaia.manter_janela_aberta()
 
 
-Entidade('Carapicuíba',        
-'RJ', 
-'http://www2.camaracarapicuiba.sp.gov.br/portaltransparencia/Pages/Geral/wfFolhaPagamento.aspx',                                                
-'A partir de 01/2017, porém está por servidor (pesquisa por nome).')
 
-Entidade('Resende/RJ',         
-'RJ', 
-'https://e-gov.betha.com.br/transparencia/01037-136/con_servidoresativos.faces?mun=OKdsadUWH3o%3D',                                             
-'A partir de 01/2017, porém está por servidor.')
+def rj_resende():
+    from navegador.rj_resende import RJResende 
+    rj_resende = RJResende()
+    rj_resende.processar_entidade()
+    rj_resende.manter_janela_aberta()
 
-Entidade('Itaquaquecetuba',    
-'RJ', 
-'https://transparencia.itaquaquecetuba.sp.gov.br/TDAPortalClient.aspx?417',                                                                     
-'A partir de 01/2017, apenas remuneração total.')
 
-Entidade('Ipojuca/RJ',         
-'RJ', 
-'http://s2.asp.srv.br/etransparencia.pm.ipojuca.pe/servlet/wwpessoalservidor?rXGyD5hur9qZbly23+MiuAyngEAGtuD+loFBiAKAFoSH7KJ9E4cjjYPDHa2xRmgC', 
-'A partir de 01/2017, porém está por órgão.')
+def pb_campina_grande():
+    from navegador.pb_campina_grande_1 import PBCampinaGrande 
+    pb_campina_grande = PBCampinaGrande()
+    pb_campina_grande.processar_entidade()
+    pb_campina_grande.manter_janela_aberta()
 
-Entidade('Itatiaia/RJ',        
-'RJ', 
-'https://e-gov.betha.com.br/transparencia/01037-136/con_servidoresativos.faces?mun=1R7DbiTV1F3ZWkqAKT7j1Q==',                                   
-'A partir de 01/2017, porém está por servidor.')
 
-Entidade('Cáceres/MT',         
-'RJ', 
-'http://177.4.174.14:5656/transparencia/',                                                                                                      
-'A partir de 01/2017, porém está por órgão.')
-
-Entidade('Niterói',            
-'RJ', 
-'https://transparencia.niteroi.rj.gov.br/#/folha-pagamento',                                                                                    
-'A partir de 01/2017, porém está por servidor (pesquisa por nome).')
-
-Entidade('Barra do Garças',    
-'RJ', 
-'https://www.gp.srv.br/transparencia_barradogarcas/servlet/contrato_servidor_v3?1',                                                             
-'A partir de 01/2017, porém está por servidor (pesquisa por nome) ou por cargo.')
-
-Entidade('Diamantino',         
-'RJ', 
-'https://www.gp.srv.br/transparencia_diamantino/servlet/contrato_servidor_v3?1',                                                                
-'A partir de 01/2017, porém está por servidor (pesquisa por nome) ou por cargo.')
-
-Entidade('Sooretama',          
-'RJ', 
-'https://www.sooretama.es.gov.br/transparencia/rh/servidores',                                                                                  
-'A partir de 01/2017, porém está por servidor (pesquisa por nome) ou por cargo.')
-
-Entidade('São Lourenço',       
-'RJ', 
-'http://transparencia.saolourenco.mg.gov.br/FolhaPagamento',                                                                                    
-'A partir de 01/2017, porém está valor líquido.')
-
-Entidade('São João do Sul',    
-'RJ', 
-'https://e-gov.betha.com.br/transparencia/01037-136/con_servidoresativos.faces',	                                                            
-'A partir de 01/2017, porém está por servidor (pesquisa por nome) ou por cargo.')
-
-Entidade('Estado do RJ',       
-'RJ', 
-'https://www.consultaremuneracao.rj.gov.br/ConsultaRemuneracao',                                                                                
-'A partir de 01/2017, porém está por órgão.')
-
-Entidade(
-    'Estado do MT',       
-    'RJ', 
-    'http://seplag.mt.gov.br/index.php?pg=remuneracao',	                                                                                            
-    'A partir de 01/2021, porém está por órgão.')
-'''
+pb_campina_grande()

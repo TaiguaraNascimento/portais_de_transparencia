@@ -10,8 +10,6 @@ from selenium.webdriver.support.ui import Select
 import pyautogui as py
 from datetime import datetime
 
-from selenium.webdriver.chrome.service import Service
-
 class Buscador():
 
     # Endereço base do arquivo
@@ -36,9 +34,11 @@ class Buscador():
         options.add_experimental_option('excludeSwitches', ['enable-logging'])
         options.add_argument("start-maximized")
 
+        # Opcao 1
         self.driver = webdriver.Chrome(options=options)
 
         self.driver.get(self.entidade.link_portal_da_transparencia)
+
 
     def definir_entidade(self, entidade: Entidade) -> None:
         self.entidade = entidade
@@ -126,13 +126,6 @@ class Buscador():
             return False
         return True 
 
-    def verificar_se_elemento_existe_por_link(self, link: str) -> bool:
-        try:
-            self.driver.find_element_by_partial_link_text(link)
-        except NoSuchElementException:
-            return False
-        return True 
-
     def pausa_curta(self) -> None:
         time.sleep(1)
     
@@ -154,8 +147,13 @@ class Buscador():
     def clicar_no_elemento_xpath(self, xpath) -> None:
         self.driver.find_element(By.XPATH, xpath).click()
 
-    def clicar_no_elemento_por_id(self, id) -> None:
+
+
+    def clicar_no_elemento_por_id(self, id):
         self.driver.find_element(By.ID, id).click()
+
+
+
 
 
 
@@ -192,6 +190,21 @@ class Buscador():
     def ano_atual(self) -> int:
         return datetime.now().year
 
+    def verificar_se_elemento_existe_por_link(self, link: str) -> bool:
+        try:
+            self.driver.find_element(By.PARTIAL_LINK_TEXT, link)
+        except NoSuchElementException:
+            return False
+        return True 
+
+
+    
+    def clicar_em_link_text(self, texto):
+        self.driver.find_element(By.PARTIAL_LINK_TEXT, texto).click()
+
+
+
+
     def acionar_link_com_javascript(self, referencia_java) -> None:
         self.driver.execute_script(referencia_java)
 
@@ -226,18 +239,41 @@ class Buscador():
 
 
 
+    def focar_em_um_iframe_especifico(self, xpath_do_iframe):
+
+        iframe = self.driver.find_element(By.XPATH, xpath_do_iframe)
+        self.driver.switch_to.frame(iframe)
+
+    
+    def retornar_para_container_original(self):
+        self.driver.switch_to.default_content()
+
+
+
+
+
+
+
+
     def contar_ocorrencias_de_classe(self, classe: str) -> int:
 
         try:
-            itens = self.driver.find_elements_by_class_name(classe)
+            itens = self.driver.find_elements(By.CLASS_NAME, classe)
             return len(itens)
 
         except:
             return 0
 
 
-    def clicar_em_link_text(self, texto):
-        self.driver.find_element(By.PARTIAL_LINK_TEXT, texto).click()
+
+
+
+
+
+
+
+
+
 
 
 
@@ -269,7 +305,7 @@ class Buscador():
         py.scroll(quantidade)
 
     def comandos_de_teclado(self, tecla1, tecla2):
-        py.hotkey(tecla1, tecla2)
+        py.hotkey([tecla1, tecla2])
 
     def obter_lista_de_elementos_por_xpath(self, xpath: str):
 

@@ -18,28 +18,33 @@ class PBCampinaGrande:
 
     def processar_entidade(self) -> None:
 
-        # Seleciona o modelo antigo
-        self.buscador.clicar_no_elemento_xpath('//*[@id="parent-fieldname-text"]/div/div[1]/div[2]/p[1]/a/img')
 
-        # Seleciona o municipio correto
-        self.buscador.selecionar_opcao_no_dropdown('ugestora', '050')
+       
 
         ano_inicial = 2015
         ano_final = 2022
 
         for ano in range(ano_inicial, ano_final):
 
-            self.buscador.selecionar_opcao_no_dropdown('ano', str(ano))
+            
 
             for orgao in self.orgaos:
+                
+                self.buscador.pausa_curta()
 
-                self.buscador.selecionar_opcao_no_dropdown('entidade', orgao[0])
+                
 
-                # Clicar no botão Consultar
-                self.buscador.clicar_no_elemento_xpath('//*[@id="form"]/table/tbody/tr[2]/td/table/tbody/tr[2]/td/table/tbody/tr[4]/td/div/input[1]')
+                
 
-                # Clicar em Pessoal
-                self.buscador.clicar_no_elemento_xpath('//*[@id="menuItens"]/table/tbody/tr/td[7]/a')
+                self.buscador.pausa_curta()
+
+                
+
+                self.buscador.pausa_curta()
+                linhas_da_tabela = '//*[@id="centro"]/div[2]/table/tbody/tr'
+                print(self.buscador.contar_ocorrencias_de_xpath(linhas_da_tabela))
+
+
 
                 mes_inicial = 1
                 mes_final = 12
@@ -47,35 +52,32 @@ class PBCampinaGrande:
                 for mes in range(mes_inicial, mes_final):
 
                     codigo = mes + 1 # Para simular o número no xpath
-                    self.buscador.clicar_no_elemento_xpath('//*[@id="centro"]/div[2]/table/tbody/tr[' + str(codigo) + ']/td[4]/div/a/img')
+                    # self.buscador.clicar_no_elemento_xpath('//*[@id="centro"]/div[2]/table/tbody/tr[' + str(codigo) + ']/td[4]/div/a/img')
 
 
 
-
-
-
-
-
-
-
+        
     def manter_janela_aberta(self):
         while(True):
             pass
 
     def popular_dados_importantes(self):
 
-        self.orgaos = [
-            ['101050', 'Câmara Municipal de Campina Grande'], 
-            ['201050', 'Prefeitura Municipal de Campina Grande'], 
-            ['301050', 'Instituto de Prev. dos Serv. Mun. de Campina Grande'], 
-            ['302050', 'Agência Municipal de Desenvolvimento de Campina Grande'], 
-            ['303050', 'Superintendência de Transportes Públicos de Campina Grande'], 
-            ['304050', 'Empresa Municipal de Urbanização da Borborema'], 
-            ['601050', 'Fundo Municipal de Saúde de Campina Grande'], 
-            ['602050', 'Fundo Municipal da Infância e Adolescência de Campina Grande'], 
-            ['603050', 'Fundo Municipal de Assistencia Social de Campina Grande'], 
-            ['604050', 'Fundo Municipal de Defesa dos Direitos Difusos de Campina Grande'], 
-            ['605050', 'Fundo Municipal do Meio Ambiente de Campina Grande']
+        
+
+        self.meses = [
+            [1, 'Janeiro'],
+            [2, 'Fevereiro'],
+            [3, 'Março'],
+            [4, 'Abril'],
+            [5, 'Maio'],
+            [6, 'Junho'],
+            [7, 'Julho'],
+            [8, 'Agosto'],
+            [9, 'Setembro'],
+            [10, 'Outubro'],
+            [11, 'Novembro'],
+            [12, 'Dezembro']
         ]
 
         self.municipios = [
